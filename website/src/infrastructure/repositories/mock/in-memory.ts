@@ -8,6 +8,7 @@ import type {
 } from "@/domain/repositories";
 import type { Application, Notification, Opportunity, Student, University, User } from "@/domain/model";
 import { applications as applicationSeed, notifications as notificationSeed, opportunities as programSeed, students as studentSeed, universities as universitySeed, users as userSeed } from "@/infrastructure/mock-data";
+import { findTableRecordBySourceId, listTableRecords, saveTableRecord } from "@/infrastructure/database/sqlite";
 
 class ArrayRepository<T extends { id: string }> {
   constructor(private readonly records: T[]) {}
@@ -67,6 +68,41 @@ export class MockNotificationRepository implements INotificationRepository {
   save(notification: Notification) { return this.store.save(notification); }
 }
 
+export class SqliteUniversityRepository implements IUniversityRepository {
+  async list() { return listTableRecords<University>("universities"); }
+  async findById(id: string) { return findTableRecordBySourceId<University>("universities", id); }
+}
+
+export class SqliteProgramRepository implements IProgramRepository {
+  async list() { return listTableRecords<Opportunity>("opportunities"); }
+  async findById(id: string) { return findTableRecordBySourceId<Opportunity>("opportunities", id); }
+  async save(program: Opportunity) { saveTableRecord<Opportunity>("opportunities", program); }
+}
+
+export class SqliteStudentRepository implements IStudentRepository {
+  async list() { return listTableRecords<Student>("students"); }
+  async findById(id: string) { return findTableRecordBySourceId<Student>("students", id); }
+}
+
+export class SqliteApplicationRepository implements IApplicationRepository {
+  async list() { return listTableRecords<Application>("applications"); }
+  async findById(id: string) { return findTableRecordBySourceId<Application>("applications", id); }
+  async save(application: Application) { saveTableRecord<Application>("applications", application); }
+}
+
+export class SqliteUserRepository implements IUserRepository {
+  async list() { return listTableRecords<User>("users"); }
+  async findById(id: string) { return findTableRecordBySourceId<User>("users", id); }
+}
+
+export class SqliteNotificationRepository implements INotificationRepository {
+  async listForUser(userId: string) {
+    return (await this.list()).filter((notification) => notification.userId === userId);
+  }
+  async list() { return listTableRecords<Notification>("notifications"); }
+  async save(notification: Notification) { saveTableRecord<Notification>("notifications", notification); }
+}
+
 export function createMockRepositories() {
   return {
     universities: new MockUniversityRepository(),
@@ -75,5 +111,16 @@ export function createMockRepositories() {
     applications: new MockApplicationRepository(),
     users: new MockUserRepository(),
     notifications: new MockNotificationRepository(),
+  };
+}
+
+export function createDatabaseRepositories() {
+  return {
+    universities: new SqliteUniversityRepository(),
+    programs: new SqliteProgramRepository(),
+    students: new SqliteStudentRepository(),
+    applications: new SqliteApplicationRepository(),
+    users: new SqliteUserRepository(),
+    notifications: new SqliteNotificationRepository(),
   };
 }

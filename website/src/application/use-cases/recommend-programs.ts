@@ -12,7 +12,7 @@ export class RecommendProgramsForStudent {
 
   /** Ranks open programs and explains which eligibility rules are met. */
   async execute(studentId: string, actor: Actor) {
-    if (actor.role === "STUDENT" && actor.userId !== studentId && actor.userId !== `user-${studentId}`) {
+    if (actor.role === "STUDENT" && actor.userId !== studentId) {
       throw new ForbiddenError("Students may only view recommendations for their own profile.");
     }
     const [student, opportunities] = await Promise.all([

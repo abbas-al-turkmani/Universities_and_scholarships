@@ -4,7 +4,7 @@ import { SubmitApplication } from "@/application/use-cases/submit-application";
 import { MockNotificationSender } from "@/infrastructure/services/mock-notification-sender";
 import { SystemClock } from "@/infrastructure/services/system-clock";
 import { UuidGenerator } from "@/infrastructure/services/uuid-generator";
-import { createMockRepositories } from "@/infrastructure/repositories/mock/in-memory";
+import { createDatabaseRepositories } from "@/infrastructure/repositories/mock/in-memory";
 import { ProgramController } from "@/presentation/controllers/program-controller";
 import { UniversityController } from "@/presentation/controllers/university-controller";
 import { AuthController } from "@/presentation/controllers/auth-controller";
@@ -15,7 +15,7 @@ import { ReviewerController } from "@/presentation/controllers/reviewer-controll
 import { DashboardController } from "@/presentation/controllers/dashboard-controller";
 
 function createContainer() {
-  const repositories = createMockRepositories();
+  const repositories = createDatabaseRepositories();
   const clock = new SystemClock();
   const ids = new UuidGenerator();
   const notificationSender = new MockNotificationSender();

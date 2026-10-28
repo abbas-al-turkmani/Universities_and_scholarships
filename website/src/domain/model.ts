@@ -94,6 +94,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  passwordHash?: string;
   role: Role;
   studentId?: string;
   active: boolean;

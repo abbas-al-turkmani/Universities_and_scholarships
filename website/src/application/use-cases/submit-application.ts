@@ -24,7 +24,7 @@ export class SubmitApplication {
     if (actor.role !== "STUDENT") throw new ForbiddenError("Only students can submit an application.");
     const student = await this.students.findById(input.studentId);
     if (!student) throw new NotFoundError("Student", input.studentId);
-    if (student.id !== actor.userId && `user-${student.id}` !== actor.userId) {
+    if (student.id !== actor.userId) {
       throw new ForbiddenError("Students may only submit applications for their own profile.");
     }
 

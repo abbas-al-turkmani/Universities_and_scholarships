@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { container } from "@/infrastructure/di/container";
+import { verifyPassword } from "@/infrastructure/security/password";
 
 export async function POST(request: Request) {
   const payload: unknown = await request.json();
@@ -12,7 +13,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 400 });
   }
   const user = await container.controllers.auth.findActiveUserByEmail(email);
-  if (!user || password !== "Demo@1234") {
+  if (!user || !user.passwordHash || !verifyPassword(password, user.passwordHash)) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
   const response = NextResponse.json({ role: user.role });

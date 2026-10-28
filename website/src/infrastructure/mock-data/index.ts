@@ -7,8 +7,15 @@ import type {
   University,
   User,
 } from "@/domain/model";
+import { hashPassword } from "@/infrastructure/security/password";
 
-export const universities: University[] = [
+const demoPasswordHash = hashPassword("Demo@1234");
+const makeUuid = (prefix?: string) => {
+  const value = crypto.randomUUID();
+  return prefix ? `${prefix}-${value}` : value;
+};
+
+const universitySeedDefinitions = [
   ["uni-01", "Boğaziçi University", "جامعة بوغازيتشي", "Turkey", "تركيا", "Istanbul", "إسطنبول", 1, "A leading research university overlooking the Bosphorus.", "جامعة بحثية رائدة تطل على مضيق البوسفور."],
   ["uni-02", "Middle East Technical University", "جامعة الشرق الأوسط التقنية", "Turkey", "تركيا", "Ankara", "أنقرة", 2, "Internationally recognized for engineering and sciences.", "جامعة معروفة عالمياً بالهندسة والعلوم."],
   ["uni-03", "Technical University of Munich", "الجامعة التقنية في ميونخ", "Germany", "ألمانيا", "Munich", "ميونخ", 3, "A world-class university for technology and innovation.", "جامعة عالمية رائدة في التقنية والابتكار."],
@@ -21,8 +28,12 @@ export const universities: University[] = [
   ["uni-10", "McGill University", "جامعة ماكغيل", "Canada", "كندا", "Montreal", "مونتريال", 10, "A historic university with a global outlook.", "جامعة عريقة برؤية عالمية."],
   ["uni-11", "Eötvös Loránd University", "جامعة إيوتفوش لوراند", "Hungary", "المجر", "Budapest", "بودابست", 11, "A historic academic home in the heart of Budapest.", "صرح أكاديمي عريق في قلب بودابست."],
   ["uni-12", "American University in Cairo", "الجامعة الأمريكية بالقاهرة", "Egypt", "مصر", "Cairo", "القاهرة", 12, "A leading English-language university in the region.", "جامعة رائدة باللغة الإنجليزية في المنطقة."],
-].map(([id, nameEn, nameAr, countryEn, countryAr, cityEn, cityAr, ranking, descEn, descAr]) => ({
-  id: String(id),
+] as const;
+
+const universityIdMap = new Map<string, string>(universitySeedDefinitions.map(([seedId]) => [seedId, makeUuid("uni")]));
+
+export const universities: University[] = universitySeedDefinitions.map(([seedId, nameEn, nameAr, countryEn, countryAr, cityEn, cityAr, ranking, descEn, descAr]) => ({
+  id: universityIdMap.get(seedId) ?? makeUuid("uni"),
   name: { en: String(nameEn), ar: String(nameAr) },
   country: { en: String(countryEn), ar: String(countryAr) },
   city: { en: String(cityEn), ar: String(cityAr) },
@@ -76,7 +87,7 @@ export const opportunities: Opportunity[] = programs.map((item, index) => {
   const days = item.days ?? 95;
   const deadline = new Date(Date.UTC(2026, 9, 28 + days)).toISOString().slice(0, 10);
   return {
-    id: `opp-${String(index + 1).padStart(2, "0")}`,
+    id: makeUuid("opp"),
     slug: `opportunity-${String(index + 1).padStart(2, "0")}`,
     type: item.type ?? "program",
     title: { en: item.titleEn, ar: item.titleAr },
@@ -122,7 +133,7 @@ const countries = ["Jordan", "Egypt", "Iraq", "Lebanon", "Palestine", "Morocco",
 const countriesAr = ["الأردن", "مصر", "العراق", "لبنان", "فلسطين", "المغرب", "تونس", "سوريا", "اليمن", "السعودية"];
 
 export const students: Student[] = Array.from({ length: 30 }, (_, index) => ({
-  id: `student-${String(index + 1).padStart(3, "0")}`,
+  id: makeUuid("student"),
   name: {
     en: `${firstNames[index % firstNames.length]} ${["Haddad", "Nasser", "Khalil", "Mansour", "Saleh"][index % 5]}`,
     ar: `${firstNamesAr[index % firstNamesAr.length]} ${["الحداد", "ناصر", "خليل", "منصور", "صالح"][index % 5]}`,
@@ -139,20 +150,44 @@ export const students: Student[] = Array.from({ length: 30 }, (_, index) => ({
   phone: `+962 7${String(index + 1).padStart(2, "0")} 000 00${String(index % 10)}`,
 }));
 
+const reviewerSeedUsers: User[] = [
+  { id: makeUuid("reviewer"), name: "Rana Abbas", email: "rana@manhal.edu", passwordHash: demoPasswordHash, role: "REVIEWER", active: true },
+  { id: makeUuid("reviewer"), name: "Omar Saleh", email: "omar@manhal.edu", passwordHash: demoPasswordHash, role: "REVIEWER", active: true },
+  { id: makeUuid("reviewer"), name: "Layla Haddad", email: "layla@manhal.edu", passwordHash: demoPasswordHash, role: "REVIEWER", active: true },
+];
+
 const applicationStatuses: Application["status"][] = [
   "SUBMITTED", "UNDER_REVIEW", "ACCEPTED", "DOCUMENTS_REQUESTED", "REJECTED",
   "WAITLISTED", "SUBMITTED", "UNDER_REVIEW", "DRAFT", "WITHDRAWN",
 ];
+
+export const users: User[] = [
+  { id: makeUuid("admin"), name: "Manhal Admin", email: "admin@manhal.edu", passwordHash: demoPasswordHash, role: "SUPER_ADMIN", active: true },
+  { id: makeUuid("admin"), name: "Operations Admin", email: "operations@manhal.edu", passwordHash: demoPasswordHash, role: "ADMIN", active: true },
+  { id: makeUuid("admin"), name: "Admissions Admin", email: "admissions@manhal.edu", passwordHash: demoPasswordHash, role: "ADMIN", active: true },
+  ...reviewerSeedUsers,
+  ...students.map((student) => ({
+    id: makeUuid("user"),
+    name: student.name.en,
+    email: student.email,
+    passwordHash: demoPasswordHash,
+    role: "STUDENT" as const,
+    studentId: student.id,
+    active: true,
+  })),
+];
+
 export const applications: Application[] = Array.from({ length: 40 }, (_, index) => {
   const status = applicationStatuses[index % applicationStatuses.length];
+  const assignedReviewerId = reviewerSeedUsers[index % reviewerSeedUsers.length].id;
   return {
-    id: `application-${String(index + 1).padStart(3, "0")}`,
+    id: makeUuid("application"),
     reference: `MNH-2026-${String(index + 123).padStart(6, "0")}`,
     studentId: students[index % students.length].id,
     opportunityId: opportunities[index % opportunities.length].id,
     status,
     submittedAt: new Date(Date.UTC(2026, 5 + (index % 5), 1 + (index % 25))).toISOString(),
-    assignedReviewer: `reviewer-${(index % 3) + 1}`,
+    assignedReviewer: assignedReviewerId,
     history: [
       { status: "SUBMITTED", date: "2026-06-02", note: "Application received" },
       ...(status === "SUBMITTED" ? [] : [{ status, date: "2026-06-08", note: "Status updated by the review team" }]),
@@ -164,32 +199,18 @@ export const applications: Application[] = Array.from({ length: 40 }, (_, index)
   };
 });
 
-export const users: User[] = [
-  { id: "super-admin", name: "Manhal Admin", email: "admin@manhal.edu", role: "SUPER_ADMIN", active: true },
-  { id: "admin-1", name: "Operations Admin", email: "operations@manhal.edu", role: "ADMIN", active: true },
-  { id: "admin-2", name: "Admissions Admin", email: "admissions@manhal.edu", role: "ADMIN", active: true },
-  { id: "reviewer-1", name: "Rana Abbas", email: "rana@manhal.edu", role: "REVIEWER", active: true },
-  { id: "reviewer-2", name: "Omar Saleh", email: "omar@manhal.edu", role: "REVIEWER", active: true },
-  { id: "reviewer-3", name: "Layla Haddad", email: "layla@manhal.edu", role: "REVIEWER", active: true },
-  ...students.map((student, index) => ({
-    id: `user-${student.id}`,
-    name: student.name.en,
-    email: student.email,
-    role: "STUDENT" as const,
-    studentId: student.id,
-    active: true,
-    ...(index === 0 ? {} : {}),
-  })),
-];
-
-export const notifications: Notification[] = Array.from({ length: 25 }, (_, index) => ({
-  id: `notification-${String(index + 1).padStart(2, "0")}`,
-  userId: `user-${students[index % students.length].id}`,
-  title: { en: "Application update", ar: "تحديث على الطلب" },
-  body: { en: "Your application is moving forward. View the latest status in your account.", ar: "طلبك يتقدم. اطّلع على آخر المستجدات في حسابك." },
-  date: new Date(Date.UTC(2026, 9, 20 - index)).toISOString(),
-  read: index > 5,
-}));
+export const notifications: Notification[] = Array.from({ length: 25 }, (_, index) => {
+  const student = students[index % students.length];
+  const userId = users.find((user) => user.role === "STUDENT" && user.studentId === student.id)?.id ?? makeUuid("user");
+  return {
+    id: makeUuid("notification"),
+    userId,
+    title: { en: "Application update", ar: "تحديث على الطلب" },
+    body: { en: "Your application is moving forward. View the latest status in your account.", ar: "طلبك يتقدم. اطّلع على آخر المستجدات في حسابك." },
+    date: new Date(Date.UTC(2026, 9, 20 - index)).toISOString(),
+    read: index > 5,
+  };
+});
 
 export function getUniversity(id: string) {
   return universities.find((university) => university.id === id);

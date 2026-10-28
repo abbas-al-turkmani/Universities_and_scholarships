@@ -257,6 +257,110 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .dashboard-page { padding-block: 27px 48px; }.dashboard-welcome { align-items: start; flex-direction: column; gap: 14px; margin-bottom: 18px; }.dashboard-welcome h1 { font-size: 25px; }.dashboard-grid { grid-template-columns: 1fr; }.dashboard-stats { gap: 8px; }.dash-stat { min-height: 112px; grid-template-columns: 29px 1fr; column-gap: 7px; padding: 10px; }.dash-stat-icon { width: 28px; height: 28px; }.dash-stat small { font-size: 8px; }.dash-stat strong { font-size: 20px; }.dash-stat-foot { font-size: 8px; }.dashboard-panel { padding: 14px; }.panel-heading { gap: 8px; }.panel-heading h2 { font-size: 13px; }.panel-heading .eyebrow { font-size: 7px; }.application-row { gap: 7px; }.application-info strong { max-width: 140px; }.application-date { display: none; }.status-pill { font-size: 7px; }.recommendation-grid { grid-template-columns: 1fr; }.recommendation-grid .opportunity-card { min-height: 245px; }.profile-card { padding: 15px; }
   .admin-stats { grid-template-columns: 1fr 1fr; gap: 9px; }.admin-stat-card { padding: 13px; }.admin-panels,.admin-bottom-grid { grid-template-columns: 1fr; }.admin-chart-panel,.status-panel { min-height: 255px; }.chart-column small { font-size: 6px; }.donut-wrap { justify-content: space-around; }.application-reference { display: none; }
 }
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 9px;
+  background: hsl(var(--primary-tint));
+  color: hsl(var(--primary));
+  font-weight: 700;
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+}
+.text-link:hover { background: white; border-color: hsl(var(--teal)); transform: translateY(-1px); }
+
+.main-nav a, .login-link, .language-link, .auth-signup a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+@media (max-width: 1024px) {
+  .container { width: min(100% - 28px, 1160px); }
+  .header-content { flex-wrap: wrap; padding-block: 12px; }
+  .main-nav { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; }
+  .header-actions { margin-inline-start: auto; }
+  .hero-layout,
+  .contact-content,
+  .how-layout,
+  .admin-panels,
+  .admin-bottom-grid,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-layout { gap: 36px; padding-block: 48px 40px; }
+  .hero-copy,
+  .hero-visual {
+    max-width: 100%;
+    justify-self: stretch;
+  }
+  .profile-details,
+  .admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .container { width: min(100% - 18px, 1160px); }
+  .header-content { gap: 12px; }
+  .brand { font-size: 18px; }
+  .main-nav { gap: 8px 14px; }
+  .main-nav a, .login-link, .language-link { font-size: 12px; padding-inline: 9px; }
+  .header-actions { width: 100%; justify-content: space-between; gap: 10px; }
+  .button, .button-small { min-height: 42px; }
+  .hero-search {
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  .hero-search .button { width: 100%; }
+  .hero-proof { flex-wrap: wrap; }
+  .hero-image-frame { inset: 10px 8px 8px; }
+  .floating-note { position: static; margin: 10px 0 0; }
+  .hero-visual { height: auto; display: grid; gap: 10px; }
+  .note-scholarship, .note-students { inset: auto; }
+  .hero-image { position: relative; height: 320px; }
+  .opportunity-grid,
+  .stats-band,
+  .profile-details,
+  .admin-stats,
+  .trust-logos,
+  .steps-list {
+    grid-template-columns: 1fr !important;
+  }
+  .stats-band { display: grid; }
+  .section-heading,
+  .cta-inner,
+  .dashboard-welcome,
+  .panel-heading,
+  .admin-dashboard > .dashboard-welcome,
+  .footer-top,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-top,
+  .footer-bottom {
+    gap: 18px;
+  }
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+  .auth-card {
+    width: min(100%, 430px);
+    padding-block: 28px 18px;
+  }
+  .auth-aside { min-height: 260px; padding: 32px 20px; }
+  .auth-signup { text-align: left; }
+}
+
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 @media (max-width: 760px) {
   .wizard-page,.track-page,.profile-page { padding-block: 29px 48px; }
