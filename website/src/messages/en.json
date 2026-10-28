@@ -1,0 +1,236 @@
+{
+  "brand": "manhal",
+  "nav": {
+    "programs": "Programs & scholarships",
+    "universities": "Universities",
+    "howItWorks": "How it works",
+    "login": "Sign in",
+    "getStarted": "Get started",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "eyebrow": "Your future has a place",
+    "title": "The world is open to your ambition.",
+    "description": "Find the right university, the right funding, and a clear path to the future you imagine.",
+    "search": "What would you like to study?",
+    "searchButton": "Explore programs",
+    "universities": "Universities",
+    "scholarships": "Scholarships",
+    "students": "Students supported"
+  },
+  "featured": {
+    "eyebrow": "A world of possibility",
+    "title": "Opportunities worth discovering",
+    "description": "Handpicked programs and scholarships to help you take the next step.",
+    "viewAll": "View all opportunities",
+    "deadline": "Deadline",
+    "daysLeft": "days left",
+    "closingSoon": "Closing soon",
+    "fullyFunded": "Fully funded",
+    "apply": "View opportunity"
+  },
+  "how": {
+    "eyebrow": "A clearer way forward",
+    "title": "From searching to starting",
+    "description": "A thoughtful process that keeps your next step simple.",
+    "stepOne": "Find your fit",
+    "stepOneBody": "Explore verified programs that match your goals and interests.",
+    "stepTwo": "Apply with confidence",
+    "stepTwoBody": "Prepare your documents and submit your application in one place.",
+    "stepThree": "Follow your progress",
+    "stepThreeBody": "Stay informed with clear updates at every step of your journey."
+  },
+  "programs": {
+    "title": "Find your next opportunity",
+    "description": "Explore programs and scholarships from universities around the world.",
+    "search": "Search programs, fields, universities...",
+    "all": "All opportunities",
+    "program": "Programs",
+    "scholarship": "Scholarships",
+    "filterBy": "Filter by",
+    "country": "Country",
+    "degree": "Degree level",
+    "field": "Field of study",
+    "allCountries": "All countries",
+    "allDegrees": "All degrees",
+    "results": "opportunities",
+    "sort": "Sort by",
+    "deadlineSoon": "Deadline soon",
+    "newest": "Newest",
+    "name": "Name",
+    "empty": "No opportunities found",
+    "emptyHint": "Try adjusting your search or filters."
+  },
+  "universities": {
+    "title": "Find a place to belong",
+    "description": "Explore ambitious universities and the communities behind them.",
+    "programs": "programs",
+    "visit": "Visit university"
+  },
+  "common": {
+    "home": "Home",
+    "learnMore": "Learn more",
+    "search": "Search",
+    "viewAll": "View all",
+    "students": "students",
+    "programs": "programs",
+    "country": "Country",
+    "allRights": "© 2026 Manhal. A brighter future starts with opportunity.",
+    "footerText": "A thoughtful path to education without borders.",
+    "startJourney": "Your next chapter starts here.",
+    "startJourneyBody": "You bring the ambition. We’ll help you find the opportunity.",
+    "exploreNow": "Explore opportunities",
+    "about": "About Manhal"
+  },
+  "dashboard": {
+    "title": "Good morning, Sara",
+    "subtitle": "Here’s what’s happening with your applications.",
+    "applications": "My applications",
+    "recommended": "Recommended for you",
+    "notifications": "Notifications",
+    "viewAll": "View all",
+    "submitted": "Submitted",
+    "underReview": "Under review",
+    "accepted": "Accepted",
+    "continueApplication": "Continue application",
+    "browse": "Browse all programs",
+    "recent": "Recent activity"
+  },
+  "auth": {
+    "welcome": "Welcome back",
+    "description": "Sign in to continue your journey with Manhal.",
+    "email": "Email address",
+    "password": "Password",
+    "signIn": "Sign in",
+    "demo": "Demo account",
+    "demoHelp": "Try the student demo with the credentials below.",
+    "noAccount": "New to Manhal?",
+    "createAccount": "Create your account"
+  },
+  "applicationWizard": {
+    "title": "Your application",
+    "description": "Take it one step at a time. Your progress is saved in this session.",
+    "steps": ["Personal details", "Academic background", "Documents", "Review"],
+    "fullName": "Full name",
+    "email": "Email address",
+    "phone": "Phone number",
+    "degree": "Current degree",
+    "institution": "Most recent institution",
+    "gpa": "GPA (out of 4.0)",
+    "graduationYear": "Graduation year",
+    "englishScore": "English test score (IELTS)",
+    "uploadTitle": "Upload supporting documents",
+    "uploadHint": "PDF, JPG or PNG · up to 10 MB per file",
+    "uploadButton": "Choose files",
+    "next": "Continue",
+    "back": "Back",
+    "submit": "Submit application",
+    "autoSaved": "Draft saved in this session",
+    "remove": "Remove",
+    "review": "Review your details",
+    "required": "Please complete this field.",
+    "invalidFile": "Choose a PDF, JPG or PNG file smaller than 10 MB.",
+    "submitError": "We could not submit your application. Please try again.",
+    "closed": "Applications for this opportunity are closed.",
+    "successTitle": "Your next chapter is underway.",
+    "successDescription": "Your application has been submitted. We’ll keep you updated as it moves forward.",
+    "reference": "Application reference",
+    "track": "Track an application",
+    "trackingDescription": "Enter your application reference and the email address used to apply.",
+    "trackButton": "Find my application",
+    "status": "Current status",
+    "noMatch": "We couldn’t find an application with those details.",
+    "timeline": "Application timeline",
+    "emailSent": "A confirmation email has been sent to your inbox."
+  },
+  "reviewer": {
+    "title": "Assigned applications",
+    "description": "Review only the applications assigned to you.",
+    "open": "Open review",
+    "details": "Application details",
+    "documents": "Submitted documents",
+    "history": "Status history",
+    "changeStatus": "Update application status",
+    "comment": "Reviewer comment",
+    "save": "Save update",
+    "saved": "Application status updated.",
+    "error": "We could not save this update.",
+    "empty": "No applications are assigned to you."
+  },
+  "admin": {
+    "manage": "Workspace",
+    "universities": "Universities",
+    "programs": "Programs & scholarships",
+    "students": "Students",
+    "users": "Users & roles",
+    "permissions": "Permissions",
+    "search": "Search records...",
+    "name": "Name",
+    "country": "Country",
+    "city": "City",
+    "programCount": "Programs",
+    "degree": "Degree",
+    "type": "Type",
+    "deadline": "Deadline",
+    "status": "Status",
+    "email": "Email",
+    "gpa": "GPA",
+    "role": "Role",
+    "active": "Active",
+    "noResults": "No records match that search.",
+    "read": "View",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "changeStatus": "Change status"
+  },
+  "staticPages": {
+    "about": {
+      "title": "About Manhal",
+      "intro": "Education can open doors, but finding the right one should not feel like a barrier.",
+      "sections": [
+        { "title": "A clearer path to possibility", "body": "Manhal brings universities, scholarships and student applications into one thoughtful experience. We help students explore credible opportunities and take the next step with confidence." },
+        { "title": "Built around students", "body": "From comparing programs to following an application, every part of the journey is designed to be understandable, welcoming and accessible." },
+        { "title": "A future without borders", "body": "We believe talent is everywhere. Our goal is to make the opportunities to learn and grow easier to discover, wherever a student begins." }
+      ]
+    },
+    "contact": {
+      "title": "Let’s talk",
+      "intro": "Have a question about a program or your application? Send our team a note.",
+      "name": "Your name",
+      "email": "Email address",
+      "message": "How can we help?",
+      "send": "Send message",
+      "sent": "Thanks — your message is ready for our team.",
+      "validation": "Please complete all fields with a valid email address."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "intro": "A few helpful answers to get you moving.",
+      "sections": [
+        { "title": "Is it free to browse opportunities?", "body": "Yes. You can explore universities, programs and scholarships without charge." },
+        { "title": "How do I start an application?", "body": "Create a student account, choose an open opportunity and follow its requirements. Keep your academic records and supporting documents ready." },
+        { "title": "Can I apply to more than one program?", "body": "Yes. You can prepare and track more than one application from your student account." },
+        { "title": "How can I check my application status?", "body": "Sign in to your account to see status updates and requests from the admissions team." }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy",
+      "intro": "Your information should be treated with care and used only to support your education journey.",
+      "sections": [
+        { "title": "Information in this demo", "body": "This demonstration app uses fictional seed data and a mock session. Do not enter real personal, academic or identity information." },
+        { "title": "How information is used", "body": "In a production service, information would be used to manage applications, provide requested updates and improve access to educational opportunities." },
+        { "title": "Your choices", "body": "A production version should provide clear controls to access, correct or remove personal information and to manage communication preferences." }
+      ]
+    },
+    "terms": {
+      "title": "Terms of use",
+      "intro": "These demo terms explain how to use the Manhal prototype responsibly.",
+      "sections": [
+        { "title": "Demonstration service", "body": "Manhal is a prototype. Program details, deadlines, eligibility and universities shown here are sample data and must be confirmed with the institution before relying on them." },
+        { "title": "No admission guarantee", "body": "Submitting information through a demo does not constitute a real university application and does not guarantee admission or scholarship funding." },
+        { "title": "Responsible use", "body": "Use the demo respectfully and do not submit real sensitive information. Production use requires verified accounts, durable storage and institution-approved content." }
+      ]
+    }
+  }
+}
