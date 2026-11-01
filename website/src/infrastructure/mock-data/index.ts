@@ -82,8 +82,17 @@ const programs: {
   { titleEn: "International Student Bursary", titleAr: "منحة دعم الطلبة الدوليين", fieldEn: "Business", fieldAr: "إدارة الأعمال", degree: "Master", universityId: "uni-05", type: "scholarship", funding: "Up to RM 25,000", fundingAr: "حتى ٢٥٬٠٠٠ رينغيت", amount: 5500, days: 0 },
 ];
 
-export const opportunities: Opportunity[] = programs.map((item, index) => {
-  const university = universities.find((entry) => entry.id === item.universityId)!;
+const seededProgramUniversityIds = new Map<string, string>(
+  universitySeedDefinitions.map(([seedId]) => [seedId, universityIdMap.get(seedId) ?? seedId]),
+);
+
+const seededPrograms = programs.map((item) => ({
+  ...item,
+  universityId: seededProgramUniversityIds.get(item.universityId) ?? item.universityId,
+}));
+
+export const opportunities: Opportunity[] = seededPrograms.map((item, index) => {
+  const university = universities.find((entry) => entry.id === item.universityId) ?? universities[0];
   const days = item.days ?? 95;
   const deadline = new Date(Date.UTC(2026, 9, 28 + days)).toISOString().slice(0, 10);
   return {
